@@ -1,0 +1,26 @@
+:root{
+    --cor-header: green;
+}
+
+header{
+    width: 100%;
+    height: 150px;
+    background-color: var(--cor-header);
+}
+
+header, 
+.box-menu, 
+.box-menu ul, 
+.box-search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-box{
+    width: 45%;
+}
+
+.box-menu ul{
+    list-style: none;
+}
