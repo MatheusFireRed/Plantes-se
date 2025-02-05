@@ -3,6 +3,25 @@
 
     $id = $nomePopular = $nomeCientifico = $familia = $genero = $cicloDeVida = $origem = $luminosidade = $solo = $toxicoHumanos = $toxicoAnimais = $dificuldade = $floracao = $regaDiasQuentes = $regaDiasFrios = $reproducao = $adubagem = $temperaturaMin = $temperaturaMax = '';
 
+    // Lógica para excluir cadastro
+    if (isset($_GET['excluir']) && is_numeric($_GET['excluir'])) {
+        $idExcluir = $_GET['excluir'];
+
+        try {
+            // Deleta o registro com o ID correspondente
+            $sqlExcluir = "DELETE FROM plantas WHERE id = :id";
+            $stmtExcluir = $pdo->prepare($sqlExcluir);
+            $stmtExcluir->bindParam(':id', $idExcluir, PDO::PARAM_INT);
+            $stmtExcluir->execute();
+
+            // Redireciona após a exclusão
+            header("Location: ../../public/html/excluido-com-sucesso.html");
+            exit;
+        } catch (PDOException $e) {
+            echo "Erro ao excluir registro: " . $e->getMessage();
+        }
+    }
+
     // Se um ID foi passado para edição
     if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
         $id = $_GET['editar'];
@@ -92,6 +111,7 @@
         }
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -101,53 +121,7 @@
 
     <link rel="stylesheet" href="../../public/css/styleCadastro.css">
     <link rel="stylesheet" href="../../public/css/styleCadastroHeader.css">
-
-    <style>
-        main {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            height: 100%;
-        }
-        
-        .pesquisa {
-            margin-bottom: 20px;
-        }
-
-        #busca, .btn-pesquisa {
-            height: 40px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid black;
-            text-align: left;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        .editar-form {
-            margin-top: 20px;
-            width: 100%;
-            border: 1px solid #ccc;
-            padding: 15px;
-            border-radius: 5px;
-            background: green;
-        }
-
-        .formulario-edicao{
-            display: flex;
-            gap: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="../../public/css/styleAlterarCadastro.css">
 </head>
 <body>
     <header>
@@ -190,7 +164,10 @@
                                 echo "<td>" . htmlspecialchars($registro['id']) . "</td>";
                                 echo "<td>" . htmlspecialchars($registro['nome_popular']) . "</td>";
                                 echo "<td>" . htmlspecialchars($registro['nome_cientifico']) . "</td>";
-                                echo "<td><a href='?editar=" . $registro['id'] . "'>Editar</a></td>";
+                                echo "<td>
+                                        <a href='?editar=" . $registro['id'] . "'>Editar</a> |
+                                        <a href='?excluir=" . $registro['id'] . "' onclick='return confirm(\"Tem certeza que deseja excluir?\")'>Excluir</a>
+                                      </td>";
                                 echo "</tr>";
                             }
                             echo "</table>";
@@ -210,6 +187,7 @@
                 <h2>Editar Planta <?= htmlspecialchars($id) ?>#</h2>
                 <form class="formulario-edicao" method="POST">
                     <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
+                    <!-- Formulário de edição com todos os campos -->
                     <div class="coluna">
                         <div class="label-input">
                             <label>Nome Popular:</label>
@@ -273,7 +251,6 @@
                             <input type="text" name="floracao" value="<?= htmlspecialchars($floracao) ?>" required>
                         </div>
                     </div>
-                   
                     <div class="coluna">
                         <div class="label-input">
                             <label for="rega_dias_quentes">Rega nos Dias Quentes:</label>
@@ -306,11 +283,12 @@
                         </div>
                     </div>
 
-                    <button type="submit">Salvar Alterações</button>
+                    <div class="div-button">
+                        <button type="submit" class="button">Salvar Alterações</button>
+                    </div>
                 </form>
             </div>
         <?php endif; ?>
-
     </main>
 </body>
 </html>

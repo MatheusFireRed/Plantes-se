@@ -1,0 +1,56 @@
+main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.pesquisa {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#busca, .btn-pesquisa {
+    height: 40px;
+    border: none;
+    outline: none;
+}
+
+#busca{
+    border-radius: 15px 0 0 15px;
+}
+
+.btn-pesquisa{
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.editar-form {
+    margin-top: 20px;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    background: green;
+}
+
+.formulario-edicao{
+    display: flex;
+    gap: 20px;
+}

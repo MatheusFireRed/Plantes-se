@@ -16,9 +16,5 @@
                 </li>
             </ul>
         </div>
-        <div class="box-pesquisa">
-           <input name="search" id="search" type="text">
-           <button id="btn-pesquisa">Pesquisar</button>
-        </div>
     </div>
 </div>
