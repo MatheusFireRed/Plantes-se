@@ -86,6 +86,8 @@
         $stmt->execute();
 
         $pdo->commit();
+
+        
     }catch (PDOException $e) {
         $pdo->rollBack();
         echo "Erro: " . $e->getMessage();

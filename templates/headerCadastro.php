@@ -1,18 +1,18 @@
 <div class='box-menu-cadastro'>
     <div class="box-logo">
-        <a href="cadastro.php"><img src="../../public/img/logos/Logo1.png" alt="Logo da página"></a>
+        <a href="#"><img src="../../public/img/logos/Logo1.png" alt="Logo da página"></a>
     </div>
     <div class="box-menu-pesquisa">
         <div class="box-menu">
             <ul>
                 <li>
-                    <a href="cadastro.php">Início</a>
+                    <a href="#">Início</a>
                 </li>
                 <li>
-                    <a href="#">Cadastrar</a>
+                    <a href="cadastro-planta.php">Cadastrar</a>
                 </li>
                 <li>
-                    <a href="#">Editar</a>
+                    <a href="editar-planta.php">Editar</a>
                 </li>
             </ul>
         </div>
